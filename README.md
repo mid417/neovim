@@ -1,7 +1,7 @@
-# 個人用 Neovim 設定 (Windows)
+# 個人用 Neovim 設定 (Windows / VSCode Neovim 対応)
 
-Windows環境で使うことを想定した、個人用のNeovim設定です。  
-プラグイン管理には `lazy.nvim` を使用し、最低限の編集機能と開発補助機能をまとめています。
+Windows環境を想定した個人用のNeovim設定です。  
+プラグイン管理には `lazy.nvim` を使用し、通常のNeovim起動とVSCode拡張 (vscode-neovim) の両方で使えるようにしています。
 
 ## 概要
 
@@ -28,14 +28,54 @@ nvim/
 		└─ winresizer.lua
 ```
 
-## 主な設定内容
+## 起動モード別の挙動
+
+`init.lua` では `vim.g.vscode ~= nil` を使って VSCode 起動かどうかを判定しています。
+
+### 共通 (Neovim / VSCode 両方)
 
 - `lazy.nvim` が未導入なら自動でクローン
 - `lua/plugins` 配下のプラグイン設定を自動ロード
-- 日本語ヘルプを優先 (`helplang=ja`)
-- 行番号 / 相対行番号を有効化
+- 日本語ヘルプ優先 (`helplang=ja`)
 - クリップボード連携 (`clipboard=unnamed`)
-- カラースキーム適用後に背景透過を維持
+
+### 通常 Neovim 起動時のみ
+
+- `syntax on`
+- 行番号 / 相対行番号 (`number`, `relativenumber`)
+- カーソルライン表示 (`cursorline`)
+- カラースキーム適用後の背景透過
+
+### VSCode (vscode-neovim) 起動時
+
+- 上記の見た目系設定は無効化して、VSCode側表示との干渉を避ける
+- 一部プラグインを無効化して、機能重複を回避
+
+## プラグイン一覧
+
+### 常時有効 (Neovim / VSCode)
+
+- `zbirenbaum/copilot.lua` (GitHub Copilot)
+- `CopilotC-Nvim/CopilotChat.nvim` (Copilot Chat)
+- `lewis6991/gitsigns.nvim` (Git変更表示)
+- `vim-jp/vimdoc-ja` (日本語ヘルプ)
+
+### 通常 Neovim のみ有効 (`enabled = not vim.g.vscode`)
+
+- `ctrlpvim/ctrlp.vim` (ファイル検索)
+- `nvim-neo-tree/neo-tree.nvim` (ファイルツリー)
+- `akinsho/toggleterm.nvim` (統合ターミナル)
+- `simeji/winresizer` (ウィンドウリサイズ)
+
+## 主なキーマップ
+
+### 通常 Neovim 起動時
+
+| キー | 動作 |
+| --- | --- |
+| `Ctrl + t` | Neo-tree のトグル |
+| `Ctrl + \\` | ToggleTerm の起動/トグル |
+| `Ctrl + e` | Winresizer モード |
 
 ## 導入手順
 
@@ -45,22 +85,11 @@ nvim/
 
 必要に応じて、`:Lazy` でプラグイン状態を確認してください。
 
-## プラグイン一覧
+## VSCode で使う場合
 
-- `ctrlpvim/ctrlp.vim` (ファイル検索)
-- `zbirenbaum/copilot.lua` (GitHub Copilot)
-- `CopilotC-Nvim/CopilotChat.nvim` (Copilot Chat)
-- `lewis6991/gitsigns.nvim` (Git変更表示)
-- `nvim-neo-tree/neo-tree.nvim` (ファイルツリー)
-- `akinsho/toggleterm.nvim` (統合ターミナル)
-- `vim-jp/vimdoc-ja` (日本語ヘルプ)
-- `simeji/winresizer` (ウィンドウリサイズ)
-
-## 主なキーマップ
-
-- `Ctrl + t`: Neo-tree のトグル
-- `Ctrl + \\`: ToggleTerm の起動/トグル
-- `Ctrl + e`: Winresizer モード
+1. VSCode に `vscode-neovim` 拡張をインストールする
+2. この設定 (`~\AppData\Local\nvim`) をそのまま利用する
+3. VSCode 起動時は `vim.g.vscode` により自動でVSCode向け動作に切り替わる
 
 ## 補足
 
