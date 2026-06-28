@@ -1,5 +1,6 @@
 return {
   "akinsho/toggleterm.nvim",
+  enabled = not vim.g.vscode,
   version = "*", -- 最新の安定版を使用
   config = function()
     local function set_terminal_keymaps(bufnr)

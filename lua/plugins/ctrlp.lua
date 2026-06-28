@@ -1,5 +1,6 @@
 return {
   "ctrlpvim/ctrlp.vim",
+  enabled = not vim.g.vscode,
   config = function()
     -- 必要であれば、ここにctrlpの設定を追加できます
     -- 例: 隠しファイル（.gitignoreなど）を検索対象に含める場合の設定
