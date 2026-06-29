@@ -27,8 +27,8 @@ if not is_vscode then
   vim.opt.cursorline = true
 end
 
-vim.opt.clipboard=unnamed
-
+-- vim.opt.clipboard=unnamed
+vim.opt.clipboard:append({"unnamedplus"})
 
 
 -- 背景を透過する関数
