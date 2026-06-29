@@ -8,7 +8,7 @@ Windows環境を想定した個人用のNeovim設定です。
 - 対象OS: Windows
 - 言語: Lua (`init.lua` + `lua/plugins/*.lua`)
 - プラグインマネージャ: `lazy.nvim`
-- 主な用途: 日常編集、Git操作補助、ファイルツリー、ターミナル連携、Copilot支援
+- 主な用途: 日常編集、Git操作補助、ファイルツリー、ターミナル連携、Copilot / 補完支援
 
 ## フォルダ構成
 
@@ -23,6 +23,7 @@ nvim/
 		├─ github-copilot.lua
 		├─ gitsigns.lua
 		├─ neo-tree.lua
+		├─ nvim-cmp.lua
 		├─ toggleterm.lua
 		├─ vimdoc-ja.lua
 		└─ winresizer.lua
@@ -55,7 +56,9 @@ nvim/
 
 ### 常時有効 (Neovim / VSCode)
 
-- `zbirenbaum/copilot.lua` (GitHub Copilot)
+- `hrsh7th/nvim-cmp` (補完エンジン)
+- `zbirenbaum/copilot.lua` (GitHub Copilot 本体)
+- `zbirenbaum/copilot-cmp` (Copilot を nvim-cmp に統合)
 - `CopilotC-Nvim/CopilotChat.nvim` (Copilot Chat)
 - `lewis6991/gitsigns.nvim` (Git変更表示)
 - `vim-jp/vimdoc-ja` (日本語ヘルプ)
@@ -76,6 +79,12 @@ nvim/
 | `Ctrl + t` | Neo-tree のトグル |
 | `Ctrl + \\` | ToggleTerm の起動/トグル |
 | `Ctrl + e` | Winresizer モード |
+| `Tab` | 補完候補が表示中なら確定、通常時はインデント |
+
+### 補完まわり
+
+- Copilot のサジェストは無効化し、`nvim-cmp` から候補として表示する
+- `Tab` は `nvim-cmp` の候補確定に使い、候補が出ていないときは通常の Tab 動作にフォールバックする
 
 ## 導入手順
 

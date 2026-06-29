@@ -6,9 +6,19 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = true, auto_trigger = true },
+        suggestion = { enabled = false },
         panel = { enabled = false },
       })
+    end,
+  },
+  -- nvim-cmp 連携
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+    },
+    config = function()
+      require("copilot_cmp").setup()
     end,
   },
   -- Copilot チャット機能
